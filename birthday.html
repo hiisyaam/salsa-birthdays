@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 Happy Birthday, Salsaa! 🎂</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <audio id="background-music" loop preload="auto" volume="0.3">
+        <source src="hbd.mp3" type="audio/mpeg">
+    </audio>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #e1f5fe 50%, #ffffff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .handwriting {
+            font-family: 'Caveat', cursive;
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-heart {
+            animation: pulse-heart 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-heart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .bounce-gift {
+            animation: bounce-gift 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce-gift {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(-5px) rotate(5deg); }
+        }
+        
+        .sparkle {
+            animation: sparkle 2s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .gift-box {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gift-box:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .hidden-message {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .hidden-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .cat-animation {
+            animation: catWalk 4s ease-in-out infinite;
+        }
+        
+        @keyframes catWalk {
+            0%, 100% { transform: translateX(0px) scaleX(1); }
+            25% { transform: translateX(50px) scaleX(1); }
+            75% { transform: translateX(-50px) scaleX(-1); }
+        }
+        
+        .flower-bloom {
+            animation: bloom 3s ease-in-out infinite;
+        }
+        
+        @keyframes bloom {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+        }
+        
+        .surprise-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid #ffb3d9;
+            transform: scale(0);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .surprise-card.show {
+            transform: scale(1);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff69b4;
+            animation: confetti-fall 3s linear infinite;
+        }
+        
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 182, 217, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #ff69b4;
+        }
+        
+        .music-control:hover {
+            background: rgba(255, 105, 180, 0.9);
+            transform: scale(1.05);
+        }
+        
+        .music-control.playing {
+            animation: music-pulse 1s ease-in-out infinite alternate;
+        }
+        
+        @keyframes music-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7); }
+            100% { box-shadow: 0 0 0 10px rgba(255, 105, 180, 0); }
+        }
+    </style>
+</head>
+<body class="relative">
+    <div id="confetti-container" class="fixed inset-0 pointer-events-none z-50"></div>
+    <div class="music-control" id="music-control" onclick="toggleMusic()">
+        <span id="music-icon">🎵</span>
+        <span id="music-text" class="handwriting text-sm text-white ml-1">Play Musik nya!</span>
+    </div>
+    
+    <div class="fixed top-10 left-10 text-6xl floating opacity-70">🌸</div>
+    <div class="fixed top-20 right-20 text-4xl floating opacity-60" style="animation-delay: -1s;">💝</div>
+    <div class="fixed bottom-20 left-20 text-5xl floating opacity-50" style="animation-delay: -2s;">🎀</div>
+    <div class="fixed bottom-10 right-10 text-4xl floating opacity-70" style="animation-delay: -0.5s;">🌺</div>
+    
+    <div class="container mx-auto px-4 py-8 min-h-screen flex flex-col items-center justify-center relative">
+        
+        <div id="welcome-section" class="text-center mb-8 slide-in">
+            <h1 class="handwriting text-6xl md:text-8xl font-bold text-pink-500 mb-4 pulse-heart">
+                Dear Birthday Girl ! 🎂
+            </h1>
+            <p class="text-2xl md:text-3xl text-blue-400 handwriting mb-8">
+                Buat temen kecil yang sekarang dah gede ✨
+            </p>
+            
+            <div class="mb-8">
+                <div class="text-8xl cat-animation cursor-pointer hover:scale-110 transition-transform" onclick="showMessage('cat-message')">
+                    🐱
+                </div>
+                <div id="cat-message" class="hidden-message mt-4">
+                    <div class="bg-white bg-opacity-90 rounded-full px-6 py-3 inline-block border-2 border-pink-300">
+                        <p class="handwriting text-xl text-pink-600">Klik si Meong buat kejutan! 😽</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 w-full max-w-4xl">
+            
+
+            <div class="flex flex-col items-center">
+                <div class="gift-box text-8xl mb-4 bounce-gift" onclick="openGift(1)">🎁</div>
+                <div id="gift-1" class="surprise-card rounded-2xl p-6 w-full max-w-sm">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">💕</div>
+                        <h3 class="handwriting text-2xl text-pink-500 mb-2">Hadiah Ultah</h3>
+                        <p class="text-blue-400">Kado dari gue ini aja yaa...wkwkwk. Gua buatin website nih. Kan katanya lu pengen bgtt. Hehe... 🌈</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center">
+                <div class="gift-box text-8xl mb-4 bounce-gift" style="animation-delay: -0.5s;" onclick="openGift(2)">🎀</div>
+                <div id="gift-2" class="surprise-card rounded-2xl p-6 w-full max-w-sm">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">🌟</div>
+                        <h3 class="handwriting text-2xl text-pink-500 mb-2">Harapan</h3>
+                        <p class="text-blue-400">Semoga di umur yang baru ini lu makin sukses, bahagia, dan semua impian lu tercapai! You deserve the best! 🚀</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center">
+                <div class="gift-box text-8xl mb-4 bounce-gift" style="animation-delay: -1s;" onclick="openGift(3)">💝</div>
+                <div id="gift-3" class="surprise-card rounded-2xl p-6 w-full max-w-sm">
+                    <div class="text-center">
+                        <div class="text-4xl mb-3">💖</div>
+                        <h3 class="handwriting text-2xl text-pink-500 mb-2">Appreciation</h3>
+                        <p class="text-blue-400">Udah dewasa bangett yaa sekarang. Beda ama dulu pas kecil.... wkwkw💕</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex justify-center space-x-8 mb-8">
+            <div class="text-6xl flower-bloom cursor-pointer hover:scale-125 transition-transform" onclick="createHearts(this)">🌹</div>
+            <div class="text-6xl flower-bloom cursor-pointer hover:scale-125 transition-transform" style="animation-delay: -1s;" onclick="createHearts(this)">🌺</div>
+            <div class="text-6xl flower-bloom cursor-pointer hover:scale-125 transition-transform" style="animation-delay: -2s;" onclick="createHearts(this)">🌸</div>
+        </div>
+        
+
+        <div class="text-center mb-8">
+            <button onclick="showSpecialMessage()" class="bg-gradient-to-r from-pink-400 to-blue-400 text-white handwriting text-2xl px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                💌 Special  Message for U  💌
+            </button>
+        </div>
+        
+        <div id="special-message" class="surprise-card rounded-2xl p-8 max-w-2xl mx-auto">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🎉</div>
+                <h2 class="handwriting text-4xl text-pink-500 mb-4">Dear Birthday Girl</h2>
+                <div class="space-y-4 text-lg text-gray-700">
+                    <p class="leading-relaxed">Happy birthday, Salsaa! Ultah yg ke 20 kan yaa? Cepet banget gasi tiba tiba dah 20 ajaa? Gua kadang masi liat lu yang dulu pas jaman bocah. Lucu aja gituu kalo ngeliat jaman dulu. Kea polos bettt....Eh sekarang mah udah pada gede", wkwkw</p>
+                    <p class="leading-relaxed">Duh nulis apaa yaaa bingungg.... Pokoknya mh sukses teruss yaa, makin keren, makin menyalaaa buat karir, kuliahnya. Satu lagiii, moga dapet cowo yg bener lah yaaa. Yang kemaren amit" sih kalo kejadian lagi....ckck</p>
+                    <p class="leading-relaxed">Kalo udh sukses, inget gua yee...Barangkali ada inpo loker dari lu. Hehe....</p>
+                    <p class="handwriting text-2xl text-pink-500 font-bold">Happy Birthday, Sall! 🎂✨</p>
+                </div>
+                <div class="mt-6">
+                    <button onclick="createConfetti()" class="bg-pink-400 text-white handwriting text-xl px-6 py-2 rounded-full hover:bg-pink-500 transition-colors">
+                        🎉 Lets Celebrate 🎉
+                    </button>        // Add hover effects for interactive elements
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-12 grid grid-cols-4 gap-4">
+            <div class="text-4xl cursor-pointer hover:scale-110 transition-transform" onclick="easterEgg(1)">🦄</div>
+            <div class="text-4xl cursor-pointer hover:scale-110 transition-transform" onclick="easterEgg(2)">🍰</div>
+            <div class="text-4xl cursor-pointer hover:scale-110 transition-transform" onclick="easterEgg(3)">⭐</div>
+            <div class="text-4xl cursor-pointer hover:scale-110 transition-transform" onclick="easterEgg(4)">🎈</div>
+        </div>
+    </div>
+    
+    <div id="easter-egg-1" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="hideEasterEgg(1)">
+        <div class="bg-white rounded-2xl p-8 mx-4 max-w-md">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🦄</div>
+                <p class="handwriting text-2xl text-pink-500">Kamu menemukan unicorn ajaib! Sama kaya hidup, banyak ajaib nyaa! ✨</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="easter-egg-2" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="hideEasterEgg(2)">
+        <div class="bg-white rounded-2xl p-8 mx-4 max-w-md">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🍰</div>
+                <p class="handwriting text-2xl text-blue-500">Virtual cake ceritanyaa! Semoga tahun ini semanis cake ini! 🥳</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="easter-egg-3" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="hideEasterEgg(3)">
+        <div class="bg-white rounded-2xl p-8 mx-4 max-w-md">
+            <div class="text-center">
+                <div class="text-6xl mb-4">⭐</div>
+                <p class="handwriting text-2xl text-purple-500">Like a star, keep shining and make your loved ones proud. 🌟</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="easter-egg-4" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="hideEasterEgg(4)">
+        <div class="bg-white rounded-2xl p-8 mx-4 max-w-md">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🎈</div>
+                <p class="handwriting text-2xl text-red-500">Balon pembawa doa! Semua impianmu akan terbang tinggi dan terwujud! Aaaminn🎊</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isPlaying = false;
+        const music = document.getElementById('background-music');
+        const musicControl = document.getElementById('music-control');
+        const musicIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
+        
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.textContent = '🎵';
+                musicText.textContent = 'Play Music';
+                musicControl.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                music.play().then(() => {
+                    musicIcon.textContent = '🎶';
+                    musicText.textContent = 'Music On';
+                    musicControl.classList.add('playing');
+                    isPlaying = true;
+                }).catch(e => {
+                    console.log('Autoplay prevented:', e);
+                    alert('Klik tombol musik untuk memulai lagu! 🎵');
+                });
+            }
+        }
+
+        function attemptAutoplay() {
+            music.play().then(() => {
+                musicIcon.textContent = '🎶';
+                musicText.textContent = 'Music On';
+                musicControl.classList.add('playing');
+                isPlaying = true;
+            }).catch(e => {
+                console.log('Autoplay blocked by browser, user interaction required');
+            });
+        }
+        function showMessage(id) {
+            const message = document.getElementById(id);
+            message.classList.add('show');
+            playClickSound();
+            
+            setTimeout(() => {
+                createSparkles(message);
+            }, 300);
+        }
+        
+
+        function openGift(giftNumber) {
+            const gift = document.getElementById(`gift-${giftNumber}`);
+            gift.classList.add('show');
+            playClickSound();
+            
+            const giftBox = gift.previousElementSibling;
+            createHearts(giftBox);
+            
+            setTimeout(() => {
+                createMiniConfetti(gift);
+            }, 500);
+        }
+        
+        function showSpecialMessage() {
+            const message = document.getElementById('special-message');
+            message.classList.add('show');
+            playClickSound();
+            
+            setTimeout(() => {
+                message.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+        
+        function createHearts(element) {
+            for (let i = 0; i < 5; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '💖';
+                heart.className = 'fixed text-2xl pointer-events-none z-40';
+                heart.style.left = element.getBoundingClientRect().left + 'px';
+                heart.style.top = element.getBoundingClientRect().top + 'px';
+                heart.style.animation = `float 2s ease-out forwards`;
+                heart.style.animationDelay = (i * 0.1) + 's';
+                
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 2000);
+            }
+        }
+        
+        function createSparkles(element) {
+            for (let i = 0; i < 10; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.className = 'fixed text-xl pointer-events-none sparkle z-40';
+                sparkle.style.left = (element.getBoundingClientRect().left + Math.random() * 200) + 'px';
+                sparkle.style.top = (element.getBoundingClientRect().top + Math.random() * 100) + 'px';
+                sparkle.style.animationDelay = (Math.random() * 2) + 's';
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                }, 3000);
+            }
+        }
+        
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#ff69b4', '#87ceeb', '#ffffff', '#ffd1dc', '#e0e6ff'];
+            const shapes = ['💖', '🌸', '⭐', '💕', '✨'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                
+                if (Math.random() > 0.5) {
+                    confetti.className = 'confetti';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                } else {
+                    confetti.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
+                    confetti.className = 'fixed text-2xl pointer-events-none';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animation = 'confetti-fall 3s linear infinite';
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                }
+                
+                container.appendChild(confetti);
+            }
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 6000);
+        }
+        
+        function createMiniConfetti(element) {
+            for (let i = 0; i < 15; i++) {
+                const confetti = document.createElement('div');
+                confetti.innerHTML = ['🎊', '🎉', '✨', '💫'][Math.floor(Math.random() * 4)];
+                confetti.className = 'fixed text-lg pointer-events-none z-40';
+                confetti.style.left = (element.getBoundingClientRect().left + Math.random() * 200) + 'px';
+                confetti.style.top = (element.getBoundingClientRect().top + Math.random() * 100) + 'px';
+                confetti.style.animation = `float 3s ease-out forwards`;
+                confetti.style.animationDelay = (Math.random() * 1) + 's';
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.parentNode.removeChild(confetti);
+                    }
+                }, 3000);
+            }
+        }
+        
+        function easterEgg(number) {
+            const egg = document.getElementById(`easter-egg-${number}`);
+            egg.classList.remove('hidden');
+            egg.classList.add('flex');
+        }
+        
+        function hideEasterEgg(number) {
+            const egg = document.getElementById(`easter-egg-${number}`);
+            egg.classList.add('hidden');
+            egg.classList.remove('flex');
+        }
+        
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                attemptAutoplay();
+            }, 1000);
+            
+            setTimeout(() => {
+                showMessage('cat-message');
+            }, 3000);
+            
+            setTimeout(() => {
+                const title = document.querySelector('h1');
+                createSparkles(title);
+            }, 1000);
+        });
+        
+        function playClickSound() {
+            if (window.AudioContext || window.webkitAudioContext) {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.1);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const interactiveElements = document.querySelectorAll('.gift-box, .cat-animation, .flower-bloom');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.filter = 'drop-shadow(0 0 20px rgba(255, 105, 180, 0.5))';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.filter = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
